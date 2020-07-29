@@ -10,10 +10,10 @@ const flash = require('connect-flash');
 const multer = require('multer');
 const errorController = require('./controllers/error');
 const User = require('./models/user');
-
+const MongoDBUri = require("./ApiKeys").MongoDB_URI
 const app = express();
 const store = new MongoDBStore({
-    uri: 'mongodb+srv://hsingla009:harshit1234@cluster0-q5idx.mongodb.net/shop?retryWrites=true&w=majority',
+    uri: MongoDBUri,
     collection: 'sessions'
 });
 const csrfProtection = csrf();
@@ -99,7 +99,7 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-    .connect('mongodb+srv://hsingla009:harshit1234@cluster0-q5idx.mongodb.net/shop?retryWrites=true&w=majority')
+    .connect(MongoDBUri)
     .then(result => {
         app.listen(3000);
     })
