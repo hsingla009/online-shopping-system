@@ -11,6 +11,7 @@ router.get('/add-product', isAuth, adminController.getAddProduct);
 router.post('/edit-product', isAuth, adminController.getEditProduct);
 // // /admin/products => GET
 router.get('/products', adminController.getProducts);
+// console.log("[adminRoutes.js 1]");
 
 router.post('/delete-product',isAuth, adminController.postDeleteProduct);
 

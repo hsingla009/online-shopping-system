@@ -39,7 +39,7 @@ exports.getProducts = (req, res, next) => {
 exports.getProduct = (req, res, next) => {
   // const isLoggedIn = req.get('cookie').split(';')[2].trim().split('=')[1] === 'true';
   const prodId = req.params.productId;
-  //  console.log(prodId);
+   console.log("[getProduct]",prodId);
   Product.findById(prodId)
     .then(product => {
       // console.log("details");

@@ -15,7 +15,7 @@ router.post('/login', authController.postLogin);
 router.post('/logout', authController.postLogout);
 
 router.get('/signup', authController.getSignup);
-
+// console.log("[authRoutes 1]");
 router.post('/signup', 
 [
     check('email').
@@ -49,4 +49,6 @@ router.post('/reset', authController.postReset);
 router.get('/reset/:token', authController.getNewPassword)
 
 router.post('/new-password', authController.postNewPassword)
+// console.log("[authRoutes 2]");
+
 module.exports = router;

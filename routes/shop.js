@@ -11,8 +11,9 @@ const router = express.Router();
 router.get('/', shopController.getIndex);
 
 router.get('/products', shopController.getProducts);
-
+// console.log("[shopRoutes.js 1]");
 router.get('/products/:productId', shopController.getProduct);
+// console.log("[shopRoutes.js 2]");
 
 router.post('/cart', isAuth, shopController.postCart);
 
