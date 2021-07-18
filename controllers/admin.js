@@ -64,7 +64,7 @@ exports.getEditProduct = (req, res, next) => {
   if (!editMode) {
     return res.redirect('/');
   }
-  // console.log("editing");
+  console.log("editing");
   const prodId = req.body.productId;
   Product.findById(prodId)
     .then(product => {
