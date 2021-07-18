@@ -154,10 +154,11 @@ exports.getProducts = (req, res, next) => {
 
   const page = +req.query.page || 1;
   let totalProd ;
-  Product.countDocuments()
+  console.log("adminProduct",req.user);
+  Product.countDocuments({userId:req.user._id})
   .then(numProd =>{
     totalProd = numProd;
-    return Product.find()
+    return Product.find({userId:req.user._id})
     .skip((page -1 )*itemPerPage)
     .limit(itemPerPage)
   })

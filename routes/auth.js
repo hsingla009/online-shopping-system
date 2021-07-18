@@ -4,7 +4,7 @@ const authController = require('../controllers/auth');
 
 const User = require('../models/user');
 
-const { check } = require('express-validator/check');
+const { check } = require('express-validator');
 
 const router = express.Router();
 
