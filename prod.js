@@ -1,0 +1,1 @@
+module.exports = {SEND_GRID_API:process.env.SEND_GRID_API,MongoDB_URI:process.env.MongoDB_URI}
