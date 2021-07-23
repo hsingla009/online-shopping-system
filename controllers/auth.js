@@ -189,13 +189,19 @@ exports.postReset = (req, res, next) => {
         }
         user.resetToken = token;
         user.resetTokenExpiration = Date.now() + 3600000;
+        if (process.env.NODE_ENV == "production") {
+          resetLink = "http://apni-dukaan1.herokuapp.com/reset/" +token;
+        }
+        else{
+          resetLink="http://localhost:3000/reset/"+token;
+        }
         return user.save().then(() => {
           res.redirect("/");
           const msg = {
             to: req.body.email,
             from: "harshitsingla3667@gmail.com",
             subject: "Reset Password",
-            html: `<p>click this <a href="http://localhost:3000/reset/${token}">link</a> for reset the password`,
+            html: `<p>click this <a href=${resetLink}>link</a> for reset the password`,
           };
           return sgMail
             .send(msg)
