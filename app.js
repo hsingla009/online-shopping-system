@@ -6,6 +6,8 @@ const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf");
 const flash = require("connect-flash");
+const isAuth = require("./middleware/is-auth");
+const shopController = require("./controllers/shop");
 const multer = require("multer");
 const errorController = require("./controllers/error");
 const User = require("./models/user");
@@ -63,8 +65,6 @@ app.use(
     store: store,
   })
 );
-app.use(csrfProtection);
-app.use(flash());
 
 app.use((req, res, next) => {
   if (!req.session.user) {
@@ -82,11 +82,19 @@ app.use((req, res, next) => {
       throw new Error(err);
     });
 });
-
 app.use((req, res, next) => {
-  console.log("[app.js locals set 1]");
+  // console.log("[app.js locals set 1]");
 
   res.locals.isAuthenticated = req.session.isLoggedIn;
+  next();
+});
+app.post("/create-order", isAuth, shopController.postOrder);
+
+app.use(csrfProtection);
+app.use(flash());
+app.use((req, res, next) => {
+  // console.log("[app.js locals set 1]");
+
   res.locals.csrfToken = req.csrfToken();
   next();
 });
@@ -108,7 +116,7 @@ app.use((error, req, res, next) => {
 mongoose
   .connect(MongoDBUri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
-    app.listen(process.env.PORT||3000);
+    app.listen(process.env.PORT || 3000);
   })
   .catch((err) => {
     console.log(err);

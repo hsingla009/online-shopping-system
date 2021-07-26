@@ -154,7 +154,7 @@ exports.getProducts = (req, res, next) => {
 
   const page = +req.query.page || 1;
   let totalProd ;
-  console.log("adminProduct",req.user);
+  // console.log("adminProduct",req.user);
   Product.countDocuments({userId:req.user._id})
   .then(numProd =>{
     totalProd = numProd;
